@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sälj & Marknadsstrategi — MLC</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<style>
+  :root {
+    --bg: #f5ede5;
+    --card: #ffffff;
+    --card-hover: #fffaf5;
+    --border: #e6d4c0;
+    --text: #3d2e1f;
+    --text-secondary: #806a55;
+    --accent: #c48a4a;
+    --accent-hover: #b37a3a;
+    --accent-light: rgba(196,138,74,0.12);
+    --red: #d45050;
+    --orange: #e8a840;
+    --green: #5cb87a;
+    --section-bg: #f3e6d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(180deg, #f0d4b0 0%, #f5dfc8 30%, #f5ede5 60%, #faf3ed 100%);
+    min-height: 100vh;
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  header img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-top: -28px;
+    margin-bottom: 36px;
+    padding-left: 62px;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+
+  .stat {
+    flex: 1;
+    background: var(--card);
+    padding: 18px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    user-select: none;
+  }
+
+  .stat:first-child { border-radius: 14px 0 0 14px; }
+  .stat:last-child { border-radius: 0 14px 14px 0; }
+
+  .stat:hover { background: var(--card-hover); }
+
+  .stat.active {
+    background: var(--card-hover);
+    box-shadow: inset 0 -3px 0 var(--accent), 0 2px 8px rgba(196,138,74,0.15);
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding: 0 4px;
+  }
+
+  .section-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .section-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-left: auto;
+  }
+
+  .badge-urgent {
+    background: rgba(212,80,80,0.12);
+    color: #c44040;
+  }
+
+  .badge-important {
+    background: rgba(232,168,64,0.12);
+    color: #b88830;
+  }
+
+  .badge-growth {
+    background: rgba(92,184,122,0.12);
+    color: #3d8a56;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(61,46,31,0.06);
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover {
+    background: var(--card-hover);
+    box-shadow: 0 4px 12px rgba(61,46,31,0.1);
+  }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .tag-owner {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .tag-timeline {
+    background: rgba(61,46,31,0.06);
+    color: var(--text-secondary);
+  }
+
+  /* TABLE */
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th {
+    background: var(--section-bg);
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+  }
+
+  td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    background: var(--card);
+    vertical-align: top;
+  }
+
+  tr:hover td {
+    background: var(--card-hover);
+  }
+
+  /* PRIORITY DOT */
+  .prio {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .prio::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prio-1::before { background: var(--red); }
+  .prio-2::before { background: var(--orange); }
+  .prio-3::before { background: var(--green); }
+
+  /* PITCH BOX */
+  .pitch-box {
+    background: linear-gradient(135deg, rgba(196,138,74,0.08) 0%, rgba(196,138,74,0.04) 100%);
+    border: 1px solid rgba(196,138,74,0.2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 10px;
+  }
+
+  .pitch-box p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  .pitch-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  /* VALUE TABLE */
+  .value-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(61,46,31,0.06);
+  }
+
+  .value-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .value-content h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .value-content p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    header h1 { font-size: 24px; }
+    header img { width: 40px; height: 40px; }
+    .subtitle { padding-left: 54px; margin-top: -24px; }
+    .container { padding: 32px 16px 60px; }
+    .stats-bar { flex-wrap: wrap; gap: 1px; }
+    .stat { min-width: 48%; }
+    .stat-value { font-size: 22px; }
+    .card { padding: 16px 18px; }
+    .pitch-box { padding: 18px 20px; }
+    .pitch-box p { font-size: 15px; }
+    .value-card { flex-direction: column; gap: 10px; }
+    table { font-size: 13px; }
+    th, td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <img src="/mlc-logo.png" alt="MLC">
+    <h1>Sälj & Marknadsstrategi</h1>
+  </header>
+  <p class="subtitle">Marknadschefens strategi med input från VD, Säljchef och Copywriter — mars 2026</p>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-value">7</div>
+      <div class="stat-label">Aktiviteter</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Kortsiktiga</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">4</div>
+      <div class="stat-label">Långsiktiga</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">2.5M</div>
+      <div class="stat-label">Intäktsmål 2027</div>
+    </div>
+  </div>
+
+  <!-- PITCH -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--accent-light); color: var(--accent);">&#128172;</div>
+      <div class="section-title">Vår pitch</div>
+    </div>
+    <div class="pitch-box">
+      <div class="pitch-label">Så här pitchar vi MLC</div>
+      <p>"Du får en erfaren Creative Director med ett helt team bakom sig — till en bråkdel av vad en traditionell byrå kostar. Vi levererar snabbare, håller högre konsistens, och kan skala upp utan att priset skenar."</p>
+    </div>
+  </div>
+
+  <!-- KUNDVÄRDE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(92,184,122,0.12); color: var(--green);">&#10003;</div>
+      <div class="section-title">Kundvärde — varför välja MLC?</div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-number">1</div>
+      <div class="value-content">
+        <h4>Snabbhet</h4>
+        <p>En vanlig byrå tar 3–4 veckor på en kampanjstrategi. MLC levererar på 1–2 veckor. Snabbare time-to-market = mer pengar för kunden.</p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-number">2</div>
+      <div class="value-content">
+        <h4>Mer för pengarna</h4>
+        <p>Kunden köper inte en person — de köper ett system. Strategi, copy, design, uppföljning — utan att betala 5 heltidslöner. Perfekt för företag med 50–500 MSEK.</p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-number">3</div>
+      <div class="value-content">
+        <h4>Konsistens</h4>
+        <p>AI:n glömmer inte brand guidelines. Tonen, färgerna, budskapet — allt följer strategin varje gång. Kunden slipper "det beror på vem som jobbar den dagen".</p>
+      </div>
+    </div>
+
+    <div class="value-card">
+      <div class="value-number">4</div>
+      <div class="value-content">
+        <h4>Senior expertis utan byrå-overhead</h4>
+        <p>15+ års erfarenhet med Mitsubishi, Qliro, Gudrun Sjödén, Stockholm Exergi. Creative Director-nivå direkt — inte en junior som lär sig på kundens budget.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PAKET -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--accent-light); color: var(--accent);">&#128230;</div>
+      <div class="section-title">Paketerade erbjudanden</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Paket</th>
+            <th>Innehåll</th>
+            <th>Pris</th>
+            <th>Målgrupp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Brand Sprint</strong></td>
+            <td>2-veckors varumärkesanalys + strategi + visuell riktning</td>
+            <td>35–50k</td>
+            <td>Nya kunder som behöver snabb hjälp</td>
+          </tr>
+          <tr>
+            <td><strong>CMO Retainer</strong></td>
+            <td>Löpande marknadsansvar: strategi, content, kampanjer (10–15h/mån)</td>
+            <td>25–40k/mån</td>
+            <td>Företag 50–500 MSEK utan egen marknadschef</td>
+          </tr>
+          <tr>
+            <td><strong>AI Creative Boost</strong></td>
+            <td>AI-driven content-produktion (bild, text, video) för en kampanj</td>
+            <td>15–25k</td>
+            <td>Företag som vill testa AI-kreation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- KORTSIKTIGT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(212,80,80,0.12); color: var(--red);">&#9889;</div>
+      <div class="section-title">Kortsiktigt — generera intäkter nu</div>
+      <span class="section-badge badge-urgent">Akut</span>
+    </div>
+
+    <div class="card">
+      <h3>1. Warm Outreach — aktivera nätverket</h3>
+      <p>Gå igenom 30+ tidigare kunder. Skicka personligt mejl eller LinkedIn-DM till de 10 med bäst relation. Mål: 3–5 möten inom 2 veckor. Fokusera på Health/Pharma (Evolan, Coala Life, Asamedic) och HoReCa — de har budgetar nu.</p>
+      <div class="card-meta">
+        <span class="tag tag-owner">Säljchef + Marzena</span>
+        <span class="tag tag-timeline">Denna vecka</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>2. Paketera CMO-as-a-Service</h3>
+      <p>Sluta sälj timmar. Skapa 3 tydliga paket (Brand Sprint, CMO Retainer, AI Creative Boost) som kan pitchas direkt. CMO Retainer är guldet — 3 kunder á 30k/mån = 1.08 MSEK/år.</p>
+      <div class="card-meta">
+        <span class="tag tag-owner">Marknadschef + Copywriter</span>
+        <span class="tag tag-timeline">Denna vecka</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>3. LinkedIn-blitz — 4 inlägg på 2 veckor</h3>
+      <p>Vecka 1: Case (Evolan) + insikt (varför företag behöver extern CMO). Vecka 2: AI-vinkel (AI-kollegor i praktiken) + soft launch av CMO-as-a-Service. Hook-first på varje inlägg.</p>
+      <div class="card-meta">
+        <span class="tag tag-owner">Copywriter + Marknadschef</span>
+        <span class="tag tag-timeline">Vecka 11–12</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LÅNGSIKTIGT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(92,184,122,0.12); color: var(--green);">&#127793;</div>
+      <div class="section-title">Långsiktigt — bygga maskinen</div>
+      <span class="section-badge badge-growth">Tillväxt</span>
+    </div>
+
+    <div class="card">
+      <h3>4. Lead Finder som aktiv pipeline</h3>
+      <p>Prioritera CRM-funktioner (LF-3, LF-4, LF-5). Veckorutin: Måndag = ny research, Onsdag = uppföljning, Fredag = pipeline review. Mål: 5 nya leads per vecka.</p>
+      <div class="card-meta">
+        <span class="tag tag-owner">Säljchef</span>
+        <span class="tag tag-timeline">Vecka 11 &rarr;</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>5. Ny webbsida — migrera från Wix</h3>
+      <p>Wix-sidan är en flaskhals (dålig SEO, svår att uppdatera). Migrera till mlc-website (React/Vite på Vercel). 4 sidor: Hem, Tjänster (med paketen), Case, Kontakt.</p>
+      <div class="card-meta">
+        <span class="tag tag-owner">AD/Designer + Copywriter</span>
+        <span class="tag tag-timeline">Mars–April</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>6. Content-strategi: Thought Leadership</h3>
+      <p>2 inlägg/vecka på LinkedIn (1 case/insikt + 1 personligt/AI). Unik vinkel: ingen annan byrå i Norden har en AI-driven organisation som MLC. Format-mix: text, carousel, korta video-reflektioner.</p>
+      <div class="card-meta">
+        <span class="tag tag-owner">Marknadschef + Copywriter</span>
+        <span class="tag tag-timeline">Löpande</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>7. Strategiska partnerskap</h3>
+      <p>Boka 2–3 luncher med partners (How Comm, Catalyst, Noend, Originalarna, Authority). Erbjud ömsesidig referral-modell. Speciellt: partners med kunder utan marknadschef = perfekt för CMO-as-a-Service.</p>
+      <div class="card-meta">
+        <span class="tag tag-owner">VD</span>
+        <span class="tag tag-timeline">Vecka 12–14</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HANDLINGSPLAN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(232,168,64,0.12); color: var(--orange);">&#128203;</div>
+      <div class="section-title">Prioriterad handlingsplan</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Prio</th>
+            <th>Åtgärd</th>
+            <th>Tidsram</th>
+            <th>Förväntad effekt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="prio prio-1">1</span></td>
+            <td>Warm outreach till 10 gamla kunder</td>
+            <td>Denna vecka</td>
+            <td>3–5 möten &rarr; 1–2 uppdrag</td>
+          </tr>
+          <tr>
+            <td><span class="prio prio-1">2</span></td>
+            <td>Paketera CMO-as-a-Service + Brand Sprint</td>
+            <td>Denna vecka</td>
+            <td>Tydligt erbjudande att pitcha</td>
+          </tr>
+          <tr>
+            <td><span class="prio prio-2">3</span></td>
+            <td>4 LinkedIn-inlägg (blitz)</td>
+            <td>Vecka 11–12</td>
+            <td>Synlighet + inbound leads</td>
+          </tr>
+          <tr>
+            <td><span class="prio prio-2">4</span></td>
+            <td>Aktivera Lead Finder pipeline</td>
+            <td>Vecka 11</td>
+            <td>Systematisk prospektering</td>
+          </tr>
+          <tr>
+            <td><span class="prio prio-3">5</span></td>
+            <td>Partner-luncher</td>
+            <td>Vecka 12–14</td>
+            <td>Referral-kanal</td>
+          </tr>
+          <tr>
+            <td><span class="prio prio-3">6</span></td>
+            <td>Ny webbsida (mlc-website)</td>
+            <td>Mars–April</td>
+            <td>SEO + trovärdighet</td>
+          </tr>
+          <tr>
+            <td><span class="prio prio-3">7</span></td>
+            <td>Löpande content-strategi</td>
+            <td>Löpande</td>
+            <td>Long-term brand building</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- LINKEDIN-TEXTER -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(74,142,196,0.12); color: #4a8ec4;">&#128221;</div>
+      <div class="section-title">Färdiga LinkedIn-texter</div>
+    </div>
+
+    <div class="card">
+      <h3>Variant A — Direkt och modig</h3>
+      <p>Företag med 50–500 MSEK i omsättning har ett problem.<br><br>
+      De är för stora för att klara sig utan marknadsföring. Men för små för att anställa en hel marknadsavdelning.<br><br>
+      Så de anlitar en byrå. Betalar för möten, processer och juniora resurser som lär sig på deras budget.<br><br>
+      Jag byggde ett alternativ.<br><br>
+      MLC ger dig en senior Creative Director med 15+ års erfarenhet från varumärken som Mitsubishi, Qliro och Stockholm Exergi — med ett helt team bakom sig. Strategi, copy, design, kampanjer.<br><br>
+      Vi levererar på halva tiden. Till en bråkdel av kostnaden. Utan att tumma på kvaliteten.<br><br>
+      Letar du efter en extern CMO som faktiskt levererar? Skriv till mig.</p>
+    </div>
+
+    <div class="card">
+      <h3>Variant B — Storytelling</h3>
+      <p>Förra året frågade en kund: "Hur kan du vara så snabb?"<br><br>
+      Svaret är enkelt. Jag har byggt mitt företag runt en idé: att senior expertis inte ska kosta som en hel byrå.<br><br>
+      Jag har jobbat med varumärkesstrategi i 15+ år. Evolan, Gudrun Sjödén, Mitsubishi Motors, Qliro. Stora varumärken med höga krav.<br><br>
+      Men jag säljer inte timmar. Jag säljer resultat.<br><br>
+      Med AI-stöd i produktion och projektledning kan jag erbjuda något som inte fanns för tre år sedan: ett helt marknadsteam — strategi, content, design — lett av en senior Creative Director. Snabbt. Konsistent. Utan byrå-overhead.<br><br>
+      Har ditt företag marknadsutmaningar men inte budget för en hel avdelning? Hör av dig så tar vi en kaffe.</p>
+    </div>
+  </div>
+
+  <!-- MEJLMALLAR -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(196,138,74,0.12); color: var(--accent);">&#9993;</div>
+      <div class="section-title">Mejlmallar</div>
+    </div>
+
+    <div class="card">
+      <h3>Till gamla kunder</h3>
+      <p><strong>Ämnesrad:</strong> Snabb fråga, [Förnamn]<br><br>
+      Hej [Förnamn],<br><br>
+      Hoppas allt är bra hos er!<br><br>
+      Jag hör av mig för att jag har utvecklat MLC:s erbjudande sedan vi jobbade ihop, och tänkte på er.<br><br>
+      Kort sagt: jag erbjuder nu CMO-as-a-Service — ett komplett marknadsansvar med strategi, content och kreativ produktion, utan att ni behöver anställa. Samma seniora nivå som tidigare, men snabbare leveranser och smartare upplägg tack vare AI-stödd produktion.<br><br>
+      Har ni några marknadsutmaningar just nu där det skulle kunna passa? Hade varit kul att ta en kaffe och höra hur det går för er.<br><br>
+      Vänliga hälsningar,<br>
+      Marzena</p>
+    </div>
+
+    <div class="card">
+      <h3>Till nya prospekts</h3>
+      <p><strong>Ämnesrad:</strong> En fråga om er marknadsföring<br><br>
+      Hej [Förnamn],<br><br>
+      Jag heter Marzena Langsdale och driver MLC — en kreativ byrå i Stockholm specialiserad på varumärkesstrategi och content marketing.<br><br>
+      Jag kontaktar er för att vi jobbar med företag i [bransch] som vill stärka sin marknadsföring utan att bygga en intern avdelning. Bland våra kunder finns Evolan Pharma, Qliro och Stockholm Exergi.<br><br>
+      Vi erbjuder:<br>
+      &bull; <strong>Brand Sprint</strong> — varumärkesstrategi och visuell riktning på 2 veckor<br>
+      &bull; <strong>CMO-as-a-Service</strong> — löpande marknadsansvar med senior Creative Director<br>
+      &bull; <strong>AI Creative Boost</strong> — snabb content-produktion för kampanjer<br><br>
+      Skulle det vara intressant med ett kort samtal för att se om vi kan hjälpa er? 20 minuter räcker.<br><br>
+      Vänliga hälsningar,<br>
+      Marzena Langsdale<br>
+      Creative Director, MLC<br>
+      marzena@marzenalangsdale.com</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  MLC Nest AB &mdash; Nordens mest empatiska och skalbara byrå
+</footer>
+
+</body>
+</html>
