@@ -358,6 +358,129 @@
     border-top: 1px solid var(--border);
   }
 
+  /* STRATEGILOGG */
+  .log-entry {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(61,46,31,0.06);
+  }
+
+  .log-entry .log-date {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .log-entry p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .log-entry .log-source {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+  }
+
+  /* ANTECKNINGAR */
+  .notes-area {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(61,46,31,0.06);
+  }
+
+  .notes-area textarea {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background: #faf6f0;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .notes-area textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .notes-area textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+  }
+
+  .notes-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .notes-btn:hover {
+    background: var(--accent-hover);
+  }
+
+  .notes-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .saved-notes {
+    margin-top: 16px;
+  }
+
+  .saved-note {
+    background: #faf6f0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .saved-note .note-time {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .notes-status {
+    font-size: 12px;
+    color: var(--green);
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .notes-status.visible {
+    opacity: 1;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 700px) {
     header h1 { font-size: 24px; }
@@ -495,6 +618,12 @@
             <td>AI-driven content-produktion (bild, text, video) för en kampanj</td>
             <td>15–25k</td>
             <td>Företag som vill testa AI-kreation</td>
+          </tr>
+          <tr>
+            <td><strong>Brand Check</strong></td>
+            <td>Gratis 30-min analys: varumärke, synlighet, kanaler — vi berättar var ni läcker pengar</td>
+            <td>Gratis</td>
+            <td>Foot-in-the-door — alla prospekts</td>
           </tr>
         </tbody>
       </table>
@@ -719,11 +848,137 @@
     </div>
   </div>
 
+  <div class="divider"></div>
+
+  <!-- STRATEGILOGG -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(196,138,74,0.12); color: var(--accent);">&#128214;</div>
+      <div class="section-title">Strategilogg</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-date">9 mars 2026</div>
+      <p><strong>Vi säljer kunskap, inte tid.</strong> AI:n är motorn, inte säljargumentet. Hastigheten är vår marginal — inte kundens rabatt. Vi ska aldrig flagga att saker "inte tar tid". Vi tar betalt för vår kompetens och erfarenhet.</p>
+      <div class="log-source">Marzena + Marknadschef + VD</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-date">9 mars 2026</div>
+      <p><strong>Brand Check som foot-in-the-door.</strong> Bjud på en gratis 30-min analys där vi definierar kundens svagheter. Låg tröskel = lätt att säga ja. Vi visar kompetens, skapar behov, och bryggar naturligt till betalt uppdrag (Brand Sprint).</p>
+      <div class="log-source">Marzena + Marknadschef</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-date">9 mars 2026</div>
+      <p><strong>4 kundlöften definierade:</strong> (1) Snabbhet — halva tiden vs traditionell byrå. (2) Mer för pengarna — ett helt team utan 5 heltidslöner. (3) Konsistens — AI glömmer inte brand guidelines. (4) Senior expertis utan byrå-overhead — CD-nivå direkt, inte juniorer.</p>
+      <div class="log-source">Marknadschef + Säljchef + Copywriter</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-date">9 mars 2026</div>
+      <p><strong>Pitchen fastställd:</strong> "Du får en erfaren Creative Director med ett helt team bakom sig — till en bråkdel av vad en traditionell byrå kostar. Vi levererar snabbare, håller högre konsistens, och kan skala upp utan att priset skenar."</p>
+      <div class="log-source">Copywriter + Marknadschef</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-date">9 mars 2026</div>
+      <p><strong>Nästa steg: MLC Strategy Chat.</strong> Bygga ett AI-chattgränssnitt direkt på strategisidan — så Marzena kan resonera med AI-teamet (Marknadschef, VD, Säljchef etc.) i webbläsaren istället för i kodfönstret. Planeras som eget projekt.</p>
+      <div class="log-source">Marzena + VD</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ANTECKNINGAR -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: rgba(232,168,64,0.12); color: var(--orange);">&#9999;&#65039;</div>
+      <div class="section-title">Mina anteckningar</div>
+    </div>
+
+    <div class="notes-area">
+      <textarea id="noteInput" placeholder="Skriv en tanke, idé eller fråga..."></textarea>
+      <div style="display: flex; align-items: center;">
+        <button class="notes-btn" id="saveNote" onclick="saveNote()">Spara anteckning</button>
+        <span class="notes-status" id="saveStatus">Sparat!</span>
+      </div>
+      <div class="saved-notes" id="savedNotes"></div>
+    </div>
+  </div>
+
 </div>
 
 <footer>
   MLC Nest AB &mdash; Nordens mest empatiska och skalbara byrå
 </footer>
+
+<script>
+const SUPABASE_URL = 'https://dxixbtxywsvshthtiwgo.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4aXhidHh5d3N2c2h0aHRpd2dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2NjE1MzgsImV4cCI6MjA4ODIzNzUzOH0.87q-gad0BtcRcYHKpsKNqoJ8wTo-8jLPUizGomLboB4';
+
+async function loadNotes() {
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/strategy_notes?order=created_at.desc&limit=50', {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    });
+    const notes = await res.json();
+    const container = document.getElementById('savedNotes');
+    container.innerHTML = notes.map(n => {
+      const d = new Date(n.created_at);
+      const dateStr = d.toLocaleDateString('sv-SE') + ' ' + d.toLocaleTimeString('sv-SE', {hour:'2-digit', minute:'2-digit'});
+      return '<div class="saved-note"><div class="note-time">' + dateStr + '</div>' + escapeHtml(n.content) + '</div>';
+    }).join('');
+  } catch(e) {
+    console.error('Kunde inte ladda anteckningar:', e);
+  }
+}
+
+async function saveNote() {
+  const input = document.getElementById('noteInput');
+  const content = input.value.trim();
+  if (!content) return;
+
+  const btn = document.getElementById('saveNote');
+  btn.disabled = true;
+  btn.textContent = 'Sparar...';
+
+  try {
+    await fetch(SUPABASE_URL + '/rest/v1/strategy_notes', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ content: content })
+    });
+    input.value = '';
+    const status = document.getElementById('saveStatus');
+    status.classList.add('visible');
+    setTimeout(() => status.classList.remove('visible'), 2000);
+    await loadNotes();
+  } catch(e) {
+    console.error('Kunde inte spara:', e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Spara anteckning';
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+document.getElementById('noteInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) saveNote();
+});
+
+loadNotes();
+</script>
 
 </body>
 </html>
